@@ -26,8 +26,6 @@ public class UserServiceImpl implements UserService{
         List<User> users = userMapper.selectByExample(example);
         if (users.size()>0){
             User resultUser = users.get(0);
-            System.out.println(resultUser.getPassword());
-            System.out.println(MD5Util.md5(user.getPassword()));
             if (resultUser.getPassword().equals(MD5Util.md5(user.getPassword())))
                 return resultUser;
         }else {

@@ -2,4 +2,4 @@
 / __| | | | | | '_ \  \ \ /\ / / | | | |
 \__ \ | |_| | | | | |  \ V  V /  | |_| |
 |___/  \__,_| |_| |_|   \_/\_/    \__,_|
-          应用版本：${application.version}
+          应用版本：${application.formatted-version}
