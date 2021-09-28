@@ -50,9 +50,13 @@ class TypeServiceImplTest {
 
     @Test
     void listType() {
-        PageInfo<Type> pageInfo = typeService.listType(1, 3);
-        List<Type> list = pageInfo.getList();
-        for (Type type : list) {
+//        PageInfo<Type> pageInfo = typeService.listType(1, 3);
+//        List<Type> list = pageInfo.getList();
+//        for (Type type : list) {
+//            log.info(type.toString());
+//        }
+        List<Type> types = typeService.listType();
+        for (Type type : types) {
             log.info(type.toString());
         }
     }

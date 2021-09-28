@@ -3,6 +3,8 @@ package com.example.service;
 import com.example.entity.Type;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 
 /**对标签的增删改查
  * @author sunwu
@@ -17,6 +19,8 @@ public interface TypeService {
     int updateType(Type type);
 
     Type getType(Long id);
+
+    List<Type> listType();
 
     PageInfo<Type> listType(int pageNum, int pageSize);
     /**

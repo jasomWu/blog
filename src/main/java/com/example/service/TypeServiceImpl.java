@@ -39,6 +39,16 @@ public class TypeServiceImpl implements TypeService{
     public Type getType(Long id) {
         return typeMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public List<Type> listType() {
+        TypeExample example = new TypeExample();
+        TypeExample.Criteria criteria = example.createCriteria();
+        criteria.getCriteria();
+        List<Type> list = typeMapper.selectByExample(example);
+        return list;
+    }
+
     //使用分页插件查询分页数据
     @Override
     public PageInfo<Type> listType(int pageNum, int pageSize) {

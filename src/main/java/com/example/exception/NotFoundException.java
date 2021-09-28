@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @since 2021-09-23-15:26
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class NotFound extends RuntimeException{
+public class NotFoundException extends RuntimeException{
     static final long serialVersionUID = 745739L;
-    public NotFound() {
+    public NotFoundException() {
         super();
     }
 
-    public NotFound(String message, Throwable cause) {
+    public NotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
-    public NotFound(String message) {
+    public NotFoundException(String message) {
         super(message);
     }
 }
