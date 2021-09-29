@@ -93,4 +93,6 @@ public interface TagMapper {
      * @mbggenerated Thu Sep 23 18:10:39 CST 2021
      */
     int updateByPrimaryKey(Tag record);
+
+    List<Tag> listTagTop();
 }

@@ -179,6 +179,41 @@
     </where>
   </select>
 
+  <!-- 用于首页的blog展示，关联user，type ... -->
+  <select id="listBlog" resultType="com.example.entity.Blog" resultMap="getAllBlog">
+        select a.*,c.id as typeId,c.name as typeName ,b.*
+         from t_blog a,t_user b, t_type c where a.user_id = b.id and a.type_id = c.id
+         order by views desc
+  </select>
+  <resultMap id="getAllBlog" type="com.example.entity.Blog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="first_picture" property="firstPicture" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="views" property="views" jdbcType="INTEGER" />
+    <result column="appreciation" property="appreciation" jdbcType="INTEGER" />
+    <result column="share_statement" property="shareStatement" jdbcType="INTEGER" />
+    <result column="commentabled" property="commentabled" jdbcType="INTEGER" />
+    <result column="published" property="published" jdbcType="INTEGER" />
+    <result column="recommend" property="recommend" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="type_id" property="typeId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="tag_ids" property="tagIds" jdbcType="VARCHAR" />
+    <association property="user" column="user_id" select="getUser"></association>
+    <association property="type" column="type_id" select="getType"></association>
+  </resultMap>
+  <select id="getUser" resultType="com.example.entity.User" parameterType="int">
+    select * from t_user where id = #{user_id}
+   </select>
+  <select id="getType" resultType="com.example.entity.Type" parameterType="int">
+    select * from t_type where id = #{type_id}
+   </select>
+
+
   <insert id="saveBlogAndTag" parameterType="com.example.po.BlogAndTag">
     insert into t_blog_tags (tag_id, blog_id) values (#{tagId},#{blogId})
   </insert>

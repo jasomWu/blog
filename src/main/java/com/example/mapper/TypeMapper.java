@@ -93,4 +93,6 @@ public interface TypeMapper {
      * @mbggenerated Thu Sep 23 18:10:03 CST 2021
      */
     int updateByPrimaryKey(Type record);
+
+    List<Type> listTypeTop();
 }

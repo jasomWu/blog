@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.entity.Tag;
 import com.example.entity.Type;
 import com.github.pagehelper.PageInfo;
 
@@ -29,4 +30,7 @@ public interface TypeService {
      * @return true表示存在 ，false表示不存在
      */
     boolean getTypeByName(String name);
+
+    List<Type> listTypeTop(Long count);
+
 }

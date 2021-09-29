@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author sunwu
@@ -76,5 +77,17 @@ public class TypeServiceImpl implements TypeService{
             return true;
         }
         return false;
+    }
+
+    /**
+     * 获取前6条，以大到小排序
+     */
+    @Override
+    public List<Type> listTypeTop(Long count) {
+        List<Type> types = typeMapper.listTypeTop();
+        List<Type> typeList = types.stream().sorted((o1, o2) -> {
+            return -(o1.getBlogs().size() - o2.getBlogs().size());
+        }).limit(count).collect(Collectors.toList());
+        return  typeList;
     }
 }

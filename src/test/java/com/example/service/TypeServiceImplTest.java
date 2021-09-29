@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,9 +57,15 @@ class TypeServiceImplTest {
 //        for (Type type : list) {
 //            log.info(type.toString());
 //        }
-        List<Type> types = typeService.listType();
+//        List<Type> types = typeService.listType();
+//        for (Type type : types) {
+//            log.info(type.toString());
+//        }
+        List<Type> types = typeService.listTypeTop(6L);
         for (Type type : types) {
-            log.info(type.toString());
+            log.info(String.valueOf(type.getBlogs().size()));
         }
+
     }
+
 }
