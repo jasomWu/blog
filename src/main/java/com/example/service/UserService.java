@@ -8,4 +8,6 @@ import com.example.entity.User;
  */
 public interface UserService {
     User checkUser(User user);
+
+    User getUserById(Long id);
 }

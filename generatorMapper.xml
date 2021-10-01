@@ -50,9 +50,9 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
         <!-- 数据库表名字和我们的 entity 类对应的映射指定 -->
-        <table tableName="t_blog" domainObjectName="Blog">
-            <columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <columnOverride column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <table tableName="t_comment" domainObjectName="Comment">
+<!--            <columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+<!--            <columnOverride column="description" javaType="java.lang.String" jdbcType="VARCHAR" />-->
         </table>
     </context>
 </generatorConfiguration>
