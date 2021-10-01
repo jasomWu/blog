@@ -200,10 +200,10 @@
             t_type a left join
             t_blog b
             on a.id =b.type_id
+            group by a.id
     </select>
     <select id="getAllBlogs" resultType="com.example.entity.Blog" parameterType="int">
         select * from t_blog where type_id = #{id}
-
     </select>
 
     <update id="updateByExampleSelective" parameterType="map">

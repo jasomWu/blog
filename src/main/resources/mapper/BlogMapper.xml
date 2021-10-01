@@ -281,6 +281,14 @@
         <association property="user" column="user_id" select="getUser"></association>
     </resultMap>
 
+<!--  listBlogById : 首页查询types  -->
+    <select id="listBlogById" resultType="com.example.entity.Blog" parameterType="long" resultMap="getAllBlog">
+        select a.*,c.id as typeId,c.name as typeName ,b.*
+         from t_blog a,t_user b, t_type c where a.user_id = b.id and a.type_id = c.id
+         and type_id = #{id}
+         order by views desc
+  </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         <!--
           WARNING - @mbggenerated
