@@ -439,6 +439,22 @@ h5,h6{font-size:1em;}
             <span th:text="${tag.name}">方法论</span>
           </div>
         </div>
+        <div class="ui attached positive message" th:if="${blog.shareStatement}">
+          <!--博客信息-->
+          <div class="ui middle aligned grid">
+            <div class="eleven wide column">
+              <ui class="list">
+                <li>作者：<span th:text="${blog.user.nickname}">孙悟</span><a href="#" th:href="@{/about}" target="_blank">（联系作者）</a></li>
+                <li>发表时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2017-10-02 09:08</span></li>
+                <li>版权声明：自由转载-非商用-非衍生-保持署名（创意共享3.0许可证）</li>
+                <li>公众号转载：请在文末添加作者公众号二维码</li>
+              </ui>
+            </div>
+            <div class="five wide column">
+              <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" alt="" class="ui right floated rounded bordered image" style="width: 110px">
+            </div>
+          </div>
+        </div>
 
         <!--赞赏-->
         <div th:if="${blog.appreciation}">
@@ -463,7 +479,7 @@ h5,h6{font-size:1em;}
       </div>
 
       <!--  留言区    -->
-      <div  class="ui bottom attached segment">
+      <div  class="ui bottom attached segment" th:if="${blog.commentabled}">
         <!--留言区域列表-->
         <div id="comment-container"  class="ui teal segment">
           <div th:fragment="commentList">
@@ -654,7 +670,7 @@ h5,h6{font-size:1em;}
       position: 'left center'
     });
 
-    var serurl = "127.0.0.1:8899";
+    var serurl =/*[[#{blog.serurl}]]*/ "127.0.0.1:8899";
     var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
     var qrcode = new QRCode("qrcode", {
       text: serurl+url,
