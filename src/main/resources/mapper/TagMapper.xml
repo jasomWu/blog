@@ -186,24 +186,24 @@
     <resultMap id="listTagIndex" type="com.example.entity.Tag">
         <id property="id" column="tagId"></id>
         <result property="name" column="name"></result>
-        <collection property="blogs" ofType="com.example.entity.Blog" >
-            <id column="id" property="id" jdbcType="BIGINT" />
-            <result column="title" property="title" jdbcType="VARCHAR" />
-            <result column="content" property="content" jdbcType="VARCHAR" />
-            <result column="first_picture" property="firstPicture" jdbcType="VARCHAR" />
-            <result column="flag" property="flag" jdbcType="VARCHAR" />
-            <result column="views" property="views" jdbcType="INTEGER" />
-            <result column="appreciation" property="appreciation" jdbcType="INTEGER" />
-            <result column="share_statement" property="shareStatement" jdbcType="INTEGER" />
-            <result column="commentabled" property="commentabled" jdbcType="INTEGER" />
-            <result column="published" property="published" jdbcType="INTEGER" />
-            <result column="recommend" property="recommend" jdbcType="INTEGER" />
-            <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-            <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-            <result column="type_id" property="typeId" jdbcType="BIGINT" />
-            <result column="user_id" property="userId" jdbcType="BIGINT" />
-            <result column="description" property="description" jdbcType="VARCHAR" />
-            <result column="tag_ids" property="tagIds" jdbcType="VARCHAR" />
+        <collection property="blogs" ofType="com.example.entity.Blog">
+            <id column="id" property="id" jdbcType="BIGINT"/>
+            <result column="title" property="title" jdbcType="VARCHAR"/>
+            <result column="content" property="content" jdbcType="VARCHAR"/>
+            <result column="first_picture" property="firstPicture" jdbcType="VARCHAR"/>
+            <result column="flag" property="flag" jdbcType="VARCHAR"/>
+            <result column="views" property="views" jdbcType="INTEGER"/>
+            <result column="appreciation" property="appreciation" jdbcType="INTEGER"/>
+            <result column="share_statement" property="shareStatement" jdbcType="INTEGER"/>
+            <result column="commentabled" property="commentabled" jdbcType="INTEGER"/>
+            <result column="published" property="published" jdbcType="INTEGER"/>
+            <result column="recommend" property="recommend" jdbcType="INTEGER"/>
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+            <result column="type_id" property="typeId" jdbcType="BIGINT"/>
+            <result column="user_id" property="userId" jdbcType="BIGINT"/>
+            <result column="description" property="description" jdbcType="VARCHAR"/>
+            <result column="tag_ids" property="tagIds" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
     <!-- 多表查询 => 首页的数据展示 -->
@@ -213,6 +213,39 @@
           where a.id = s.tag_id and b.id = s.blog_id
      </select>
 
+    <select id="listBlogByTagId" resultMap="listBlogByid" parameterType="long">
+        select b.* ,t.*,u.*
+          from t_blog b,t_blog_tags s,t_tag a,t_type t,t_user u
+          where a.id = s.tag_id and b.id = s.blog_id and b.type_id = t.id and b.user_id = u.id
+		and a.id =#{id}
+    </select>
+    <resultMap id="listBlogByid" type="com.example.entity.Blog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="first_picture" property="firstPicture" jdbcType="VARCHAR"/>
+        <result column="flag" property="flag" jdbcType="VARCHAR"/>
+        <result column="views" property="views" jdbcType="INTEGER"/>
+        <result column="appreciation" property="appreciation" jdbcType="INTEGER"/>
+        <result column="share_statement" property="shareStatement" jdbcType="INTEGER"/>
+        <result column="commentabled" property="commentabled" jdbcType="INTEGER"/>
+        <result column="published" property="published" jdbcType="INTEGER"/>
+        <result column="recommend" property="recommend" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="type_id" property="typeId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="tag_ids" property="tagIds" jdbcType="VARCHAR"/>
+        <association property="user" column="user_id" select="getUser"></association>
+        <association property="type" column="type_id" select="getType"></association>
+    </resultMap>
+    <select id="getUser" resultType="com.example.entity.User" parameterType="int">
+    select * from t_user where id = #{user_id}
+   </select>
+    <select id="getType" resultType="com.example.entity.Type" parameterType="int">
+    select * from t_type where id = #{type_id}
+   </select>
 
 
     <update id="updateByExampleSelective" parameterType="map">

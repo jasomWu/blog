@@ -1,5 +1,6 @@
 package com.example.mapper;
 
+import com.example.entity.Blog;
 import com.example.entity.Tag;
 import com.example.entity.TagExample;
 import java.util.List;
@@ -95,4 +96,6 @@ public interface TagMapper {
     int updateByPrimaryKey(Tag record);
 
     List<Tag> listTagTop();
+
+    List<Blog> listBlogByTagId(Long id);
 }
